@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agriprice_backend
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py seed_data &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=agriprice-secret-key-change-in-production
+      - GEMINI_API_KEY=AIzaSyBfdPuRqYjYBnSjV92pj_-_Kj_zJZ2tZ_M
+      - GOOGLE_MAPS_API_KEY=AIzaSyCtL4ITV-mDPnoLbSGpEKupt_ztNZJSEio
+    networks:
+      - agriprice_net
+
+volumes:
+  static_volume:
+  media_volume:
+
+networks:
+  agriprice_net:
+    driver: bridge

@@ -1,0 +1,22 @@
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Virtual environments
+backend/venv/
+backend/.env
+flutter_app/.env
+
+# Flutter local config
+flutter_app/build/
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugins
+flutter_app/.flutter-plugins-dependencies
+
+# Django local config
+backend/db.sqlite3
+backend/staticfiles/
+backend/media/
